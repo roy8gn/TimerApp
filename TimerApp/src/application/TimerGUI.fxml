@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="367.0" prefWidth="505.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TimerController">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="367.0" prefWidth="505.0">
+         <children>
+            <ProgressBar fx:id="progressionBar" layoutX="103.0" layoutY="246.0" prefHeight="31.0" prefWidth="303.0" progress="0.0" />
+            <HBox layoutX="101.0" layoutY="75.0" prefHeight="90.0" prefWidth="303.0">
+               <children>
+                  <TextField fx:id="hour" alignment="CENTER" prefHeight="91.0" prefWidth="89.0" promptText="00" text="00">
+                     <font>
+                        <Font size="38.0" />
+                     </font>
+                  </TextField>
+                  <Label alignment="CENTER" prefHeight="90.0" prefWidth="18.0" text=":">
+                     <font>
+                        <Font size="43.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="minutes" alignment="CENTER" prefHeight="91.0" prefWidth="89.0" promptText="00" text="00">
+                     <font>
+                        <Font size="38.0" />
+                     </font>
+                  </TextField>
+                  <Label alignment="CENTER" prefHeight="92.0" prefWidth="18.0" text=":">
+                     <font>
+                        <Font size="43.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="seconds" alignment="CENTER" prefHeight="91.0" prefWidth="89.0" promptText="00" text="00">
+                     <font>
+                        <Font size="38.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <Label alignment="CENTER" layoutX="30.0" layoutY="184.0" prefHeight="45.0" prefWidth="71.0" text="Note:">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <TextField fx:id="note" alignment="CENTER" layoutX="101.0" layoutY="191.0" prefHeight="31.0" prefWidth="303.0" />
+            <HBox layoutX="23.0" layoutY="14.0" prefHeight="42.0" prefWidth="140.0">
+               <children>
+                  <Button fx:id="darkButton" mnemonicParsing="false" onAction="#darkMode" prefHeight="40.0" prefWidth="70.0" text="Dark">
+                     <font>
+                        <Font size="19.0" />
+                     </font></Button>
+                  <Button fx:id="lightButton" mnemonicParsing="false" onAction="#lightMode" prefHeight="40.0" prefWidth="70.0" text="Light">
+                     <font>
+                        <Font size="19.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+            <HBox layoutX="180.0" layoutY="301.0" prefHeight="38.0" prefWidth="150.0">
+               <children>
+                  <Button fx:id="startButton" alignment="CENTER" mnemonicParsing="false" onAction="#startTimer" prefHeight="38.0" prefWidth="75.0" text="Start">
+                     <font>
+                        <Font size="19.0" />
+                     </font></Button>
+                  <Button fx:id="resetTimerButton" alignment="CENTER" mnemonicParsing="false" onAction="#resetTimer" prefHeight="38.0" prefWidth="75.0" text="Reset">
+                     <font>
+                        <Font size="19.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
