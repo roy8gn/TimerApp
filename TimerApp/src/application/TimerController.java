@@ -128,33 +128,28 @@ public class TimerController implements Initializable {
     	try {
     		timer.start();
     	}
-		catch(ConcurrentModificationException ex){}
-		
-    	
+		catch(ConcurrentModificationException ex){}   	
     }
     
-    void releaseTimer() { // Reset Button is pressed
+    @FXML
+    void resetTimer(ActionEvent event){ // Reset Button is pressed	
+    	hours.setText("00");
+    	minutes.setText("00");
+    	seconds.setText("00");
+    	note.clear();
     	hours.setEditable(true);
     	minutes.setEditable(true);
     	seconds.setEditable(true);
     	note.setEditable(true);
     	isRunning = false;
     	mediaPlayer.stop();
-    }
-
-    @FXML
-    void resetTimer(ActionEvent event) {
-    	
-    	hours.setText("00");
-    	minutes.setText("00");
-    	seconds.setText("00");
-    	note.clear();
-    	releaseTimer();
     	isPlaying = false;
     	timerProgressionBar.setProgress(0);
     	TimerIndicator.setProgress(0);
     }
 	
+    // Show the the number in his TextField.
+    // If the number is lower than 10, it adds a 0 on the left (5 becomes 05).
 	public void setTextForTextfield(TextField tf, int time) {
 		if(time<10) {
 			tf.setText("0"+time);
@@ -164,12 +159,11 @@ public class TimerController implements Initializable {
 		}
 	}
 	
-	
 	public int getInt(TextField tf) { // get the int value from a TextField
 		 return Integer.parseInt(tf.getText().toString());
 	}
 	
-	public boolean onlyNumbers(TextField tf, int max) {
+	public boolean onlyNumbers(TextField tf, int max){ // Validation for the right input
 		try {
 		     int number = getInt(tf);
 		     if(number>max) return false;
@@ -180,8 +174,7 @@ public class TimerController implements Initializable {
 		return true;
 	}
 	
-	
-	public class Timer extends Thread{
+	public class Timer extends Thread{ // the Timer thread
 
 		private int secondsCount;
 		private int minutesCount;
@@ -191,7 +184,7 @@ public class TimerController implements Initializable {
 			originalNumberOfSeconds = seconds;
 		}
 		
-		@Override @FXML
+		@Override
 		public void run() throws ConcurrentModificationException {
 			double precentage;
 			while(isRunning && secondesToRun>=0) {
