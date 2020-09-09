@@ -1,0 +1,51 @@
+.root { 
+    -fx-background: rgb(47, 46, 53);
+}
+
+.label{
+	-fx-background: rgb(47, 46, 53);
+    -fx-text-fill: white;
+}
+
+.text-field {
+	-fx-background-color: black;
+    -fx-text-fill: white;
+}
+
+.progress-bar > .track {
+  -fx-text-box-border: black;
+  -fx-control-inner-background: black;
+}
+
+.progress-bar .bar { 
+    -fx-padding: 1px; 
+    -fx-background-insets: 0.5; 
+    -fx-accent: orange;
+}
+
+.progress-indicator{
+
+	-fx-control-inner-background: black;
+	-fx-progress-color: orange;
+
+}
+
+.progress-indicator .percentage {
+    -fx-fill: white;
+}
+
+.button{
+    -fx-background-color: rgb(222, 154, 36);
+	 -fx-text-fill: black;
+}
+
+
+.button:pressed:hover {
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}
+
+.button:hover{
+    -fx-text-fill: white;
+    -fx-background-color: rgb(254, 171, 45);
+}
