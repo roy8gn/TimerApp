@@ -1,16 +1,13 @@
 package application;
 
 
-import java.io.File;
 import java.net.URL;
 import java.util.ConcurrentModificationException;
 import java.util.ResourceBundle;
 
-import java.io.File;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
-
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -55,7 +52,6 @@ public class TimerController implements Initializable {
     @FXML
     private Button lightButton;
 
-    private boolean isPlaying;
     private boolean isRunning;
     private TimerController.Timer timer;
     private int secondesToRun;
@@ -66,7 +62,7 @@ public class TimerController implements Initializable {
     @Override
 	public void initialize(URL location, ResourceBundle resources) { // Initialize Controller
 		isRunning = false;
-		isPlaying = false;
+
 		lightButton.setDisable(true);
     	darkButton.setDisable(false);
     	
@@ -80,6 +76,7 @@ public class TimerController implements Initializable {
     	wrongInputAlert.setContentText("Input Must be only numbers!\n"
     			+ "Hours allowed range: 0-99\n"
     			+ "Minutes and Seconds Allowed range: 0-59");
+    	
     	try {
 			String mp3 = "pokemon_route_1.mp3";
 			URL resource = getClass().getResource(mp3);
@@ -128,7 +125,8 @@ public class TimerController implements Initializable {
     	try {
     		timer.start();
     	}
-		catch(ConcurrentModificationException ex){}   	
+		catch(ConcurrentModificationException ex){}   
+    	startButton.setDisable(true);
     }
     
     @FXML
@@ -143,9 +141,9 @@ public class TimerController implements Initializable {
     	note.setEditable(true);
     	isRunning = false;
     	mediaPlayer.stop();
-    	isPlaying = false;
     	timerProgressionBar.setProgress(0);
     	TimerIndicator.setProgress(0);
+    	startButton.setDisable(false);
     }
 	
     // Show the the number in his TextField.
@@ -166,7 +164,7 @@ public class TimerController implements Initializable {
 	public boolean onlyNumbers(TextField tf, int max){ // Validation for the right input
 		try {
 		     int number = getInt(tf);
-		     if(number>max) return false;
+		     if(number>max || number<0) return false;
 		}
 		catch (NumberFormatException e) {
 		     return false;
@@ -187,7 +185,7 @@ public class TimerController implements Initializable {
 		@Override
 		public void run() throws ConcurrentModificationException {
 			double precentage;
-			while(isRunning && secondesToRun>=0) {
+			while(isRunning && secondesToRun>-1) {
 				secondsCount = secondesToRun%60;
 				minutesCount = (secondesToRun/60)%60; //getInt(minutes);
 				hoursCount = secondesToRun/60/60;//getInt(hours);
