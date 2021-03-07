@@ -107,30 +107,36 @@ public class TimerController implements Initializable {
 
     @FXML
     void startTimer(ActionEvent event) throws InterruptedException {
-    	
     	if(!(onlyNumbers(hours, 99) && onlyNumbers(minutes, 59) && onlyNumbers(seconds, 59))){
-    		wrongInputAlert.show();
-    		return;
-    	}
-    	secondesToRun = getInt(seconds) + getInt(minutes)*60 + getInt(hours)*60*60;
+			wrongInputAlert.show();
+			resetTimer();
+			return;
+		}
+    	Thread taskThread = new Thread(new Runnable() {
+    		@Override
+    		public void run() {
+    			
+    			secondesToRun = getInt(seconds) + getInt(minutes)*60 + getInt(hours)*60*60;
 
-    	hours.setEditable(false);
-    	minutes.setEditable(false);
-    	seconds.setEditable(false);
-    	note.setEditable(false);
-    	timer = new Timer(secondesToRun);
-    	System.out.println(secondesToRun);
-    	isRunning = true;
-    	
-    	try {
-    		timer.start();
-    	}
-		catch(ConcurrentModificationException ex){}   
-    	startButton.setDisable(true);
+    			hours.setEditable(false);
+    			minutes.setEditable(false);
+    			seconds.setEditable(false);
+    			note.setEditable(false);
+    			timer = new Timer(secondesToRun);
+    			System.out.println(secondesToRun);
+    			isRunning = true;
+
+    			try {
+    				timer.start();
+    			}
+    			catch(ConcurrentModificationException ex){}   
+    			startButton.setDisable(true);
+
+    		}});
+    	taskThread.start();	
     }
     
-    @FXML
-    void resetTimer(ActionEvent event){ // Reset Button is pressed	
+    public void resetTimer() {
     	hours.setText("00");
     	minutes.setText("00");
     	seconds.setText("00");
@@ -144,6 +150,11 @@ public class TimerController implements Initializable {
     	timerProgressionBar.setProgress(0);
     	TimerIndicator.setProgress(0);
     	startButton.setDisable(false);
+    }
+    
+    @FXML
+    void resetTimer(ActionEvent event){ // Reset Button is pressed	
+    	resetTimer();
     }
 	
     // Show the the number in his TextField.
